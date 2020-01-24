@@ -1,4 +1,4 @@
-# Download data from ocean color website automatically
+# Download data from ocean color website using command line
 
 This project is to help download ocean color data (Level 1) from the [Ocean Color Website](https://oceancolor.gsfc.nasa.gov/).
 
