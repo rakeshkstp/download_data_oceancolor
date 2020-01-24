@@ -3,9 +3,24 @@
 shopt -s nocaseglob	# Case insensitive
 
 # Create link files from in files
-for inputfile in *.in
-do
-    outputfile=$(sed "s/.in/.links/g" <<<"$inputfile")	# define output filename
+if [ -f templist ]; then
+			rm templist
+fi
+
+nfiles=$(ls -1 *.in 2>/dev/null | wc -l)
+
+if [ $nfiles -gt 0 ]; then
+		ls -1 *.in > templist
+fi
+
+if [ -f templist ]; then
+  echo "$nfiles infiles are present."
+  cat templist
+
+  for inputfile in `cat templist`
+    do
+    echo $inputfile
+    outputfile=$(sed "s/.in/.link/g" <<<"$inputfile")	# define output filename
     rm -f $outputfile	# remove existing output file, if present
 
     # Read in file, replace all tabs with next line, remove any extra lines present in the in file and add .bz2 at the end.
@@ -22,12 +37,28 @@ do
     rm -f tmpfile
     rm -f sorted
     rm $inputfile
-done
+  done
+  rm -f templist
+fi
 
 # Read the link files created in th previous section of this code
-for inputfile in *.links
-do
-    foldername=$(sed "s/.links//g" <<<"$inputfile") # Define folder name to download images
+if [ -f templist ]; then
+			rm templist
+fi
+
+nfiles=$(ls -1 *.link 2>/dev/null | wc -l)
+
+if [ $nfiles -gt 0 ]; then
+		ls -1 *.link > templist
+fi
+
+if [ -f templist ]; then
+  echo "$nfiles link files are present."
+  cat templist
+
+  for inputfile in `cat templist`
+  do
+    foldername=$(sed "s/.link//g" <<<"$inputfile") # Define folder name to download images
     mkdir $foldername	# Create folder
     cd $foldername	# Change directory to the newly created folder
 
@@ -35,4 +66,6 @@ do
     cat ../$inputfile | wget --user=USERNAME --password=PASSWORD --auth-no-challenge=on --keep-session-cookies -i -
 
     cd ..  # get back to the folder containing link files
-done
+  done
+  rm -f templist
+fi
