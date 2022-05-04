@@ -2,6 +2,22 @@
 
 This project is to help download ocean color data (Level 1) from the [Ocean Color Website](https://oceancolor.gsfc.nasa.gov/).
 
+## Before we begin...
+*You might need to create or update .netrc file in your $HOME*
+* Go to you $HOME directory
+```
+$ cd $HOME
+```
+* Create or update .netrc file using vim or any of your favourite editor.
+```
+$ vim .netrc
+```
+* Add the following contents and save.
+```
+machine urs.earthdata.nasa.gov login USERNAME password PASSWORD
+```
+*Replace USERNAME and PASSWORD with your [Earthdata](https://urs.earthdata.nasa.gov/) login and password.*
+
 ## How to use the bash script?
 * Create an in file.
 ```
