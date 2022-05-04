@@ -29,8 +29,9 @@ I recommend naming the file as YYYYMM.in. Therefore, the filename for the given 
 * Choose your options here (Level 1) and Review order.
 * Copy the list from the website and paste in 201806.in
 * Use bash to run the script
+*You will need to update line 66 of downalod_ocdata.bash with your [Earthdata](https://urs.earthdata.nasa.gov/) username and password.*
 ```
-bash download_ocdata.bash
+$ bash download_ocdata.bash
 ```
 
 ### Example: 201806.in
